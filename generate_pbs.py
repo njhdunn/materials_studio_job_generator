@@ -50,7 +50,7 @@ parser.add_argument("-e", "--email", type=str, action="store", default=DEFAULT_E
 			help="Email to send job alerts to. Defaults to {0}.".format(DEFAULT_EMAIL))
 parser.add_argument("-x", "--executable", type=str, action="store", default=DEFAULT_EXE,
 			help=("Script for running the materials studio executable. Defaults to {0}."
-				"Valid choices are {1}.").format(DEFAULT_EXE, VALID_EXES))
+				" Valid choices are {1}.").format(DEFAULT_EXE, VALID_EXES))
 parser.add_argument("-d", "--directory", type=str, action="store", default=WORKING_DIR,
 			help=("Directory containing the Materials Studio job file(s)."
 				" Defaults to current working directory ({0})").format(WORKING_DIR))
