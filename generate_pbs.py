@@ -109,7 +109,7 @@ pbs_string = pbs_string.replace("{MEM}", str(total_mem))
 pbs_string = pbs_string.replace("{PMEM}", str(final_pmem))
 pbs_string = pbs_string.replace("{EMAIL}", args.email)
 pbs_string = pbs_string.replace("{EXECUTABLE}", args.executable)
-pbs_string = pbs_string.replace("{JOB_FILE}", args.jobfile)
+pbs_string = pbs_string.replace("{JOB_FILE}", args.jobfile[:-4])
 pbs_string = pbs_string.replace("{JOB_DIRECTORY}", args.directory)
 
 outfile = open(args.output, "w")
