@@ -75,7 +75,10 @@ if args.mem != None:
 else:
 	total_mem = total_mem(nodes=args.nodes, ppn=args.ppn, pmem=final_pmem)
 
-# location of the pwd
+
+jobfile = "{0}.xsd".format(args.jobfile )
+
+
 
 ## Basic error checking
 
@@ -94,8 +97,8 @@ if total_mem > 1024:
 	print "There is no queue where this job would run on mesabi."
 	exit(1)
 
-if not os.path.isfile(args.jobfile):
-	print "ERROR: File \'{0}\' not found in specified directory {1}".format(args.jobfile, args.directory)
+if not os.path.isfile(jobfile):
+	print "ERROR: File \'{0}\' not found in specified directory {1}".format(jobfile, args.directory)
 	exit(1)
 
 ## Format output string
@@ -109,7 +112,7 @@ pbs_string = pbs_string.replace("{MEM}", str(total_mem))
 pbs_string = pbs_string.replace("{PMEM}", str(final_pmem))
 pbs_string = pbs_string.replace("{EMAIL}", args.email)
 pbs_string = pbs_string.replace("{EXECUTABLE}", args.executable)
-pbs_string = pbs_string.replace("{JOB_FILE}", args.jobfile[:-4])
+pbs_string = pbs_string.replace("{JOB_FILE}", args.jobfile)
 pbs_string = pbs_string.replace("{JOB_DIRECTORY}", args.directory)
 
 outfile = open(args.output, "w")
