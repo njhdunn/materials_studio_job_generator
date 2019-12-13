@@ -7,7 +7,6 @@ def total_mem(nodes, ppn, pmem):
 	return int(math.ceil(pmem*nodes*ppn*1.02))
 
 DEFAULT_WALLTIME="24:00:00"
-DEFAULT_EMAIL="ganzx001@umn.edu"
 DEFAULT_NODES=1
 DEFAULT_PPN=24
 DEFAULT_PMEM=2
@@ -22,7 +21,6 @@ WORKING_DIR = os.getcwd()
 pbs_template_string = ("#!/bin/bash -l\n"
 "#PBS -l walltime={WALLTIME},pmem={PMEM}gb,mem={MEM}gb,nodes={NODES}:ppn={PPN}\n"
 "#PBS -m abe\n"
-"#PBS -M {EMAIL}\n"
 "module load materialsstudio/2018\n"
 "export DSD_MachineList=$PBS_NODEFILE\n"
 "export LD_LIBRARY_PATH=/lib64:/usr/lib64:$LD_LIBRARY_PATH\n"
@@ -46,8 +44,6 @@ parser.add_argument("-q", "--pmem", type=int, action="store",
 			help="Memory per processor in gb. Defaults to 2gb.".format(DEFAULT_PMEM))
 parser.add_argument("-m", "--mem", type=int, action="store",
 			help="Total memory for the job in gb. Defaults to ceil(nodes*ppn*pmem*1.02) ({0}gb).".format(DEFAULT_MEM))
-parser.add_argument("-e", "--email", type=str, action="store", default=DEFAULT_EMAIL,
-			help="Email to send job alerts to. Defaults to {0}.".format(DEFAULT_EMAIL))
 parser.add_argument("-x", "--executable", type=str, action="store", default=DEFAULT_EXE,
 			help=("Script for running the materials studio executable. Defaults to {0}."
 				" Valid choices are {1}.").format(DEFAULT_EXE, VALID_EXES))
@@ -107,10 +103,8 @@ pbs_string = pbs_template_string.replace("{WALLTIME}", args.walltime)
 pbs_string = pbs_string.replace("{NODES}", str(args.nodes))
 pbs_string = pbs_string.replace("{PPN}", str(args.ppn))
 pbs_string = pbs_string.replace("{NP}", str(total_nodes))
-pbs_string = pbs_string.replace("{EMAIL}", args.email)
 pbs_string = pbs_string.replace("{MEM}", str(total_mem))
 pbs_string = pbs_string.replace("{PMEM}", str(final_pmem))
-pbs_string = pbs_string.replace("{EMAIL}", args.email)
 pbs_string = pbs_string.replace("{EXECUTABLE}", args.executable)
 pbs_string = pbs_string.replace("{JOB_FILE}", args.jobfile)
 pbs_string = pbs_string.replace("{JOB_DIRECTORY}", args.directory)
