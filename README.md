@@ -1,5 +1,6 @@
 # Materials Studio PBS Script Generator
 
+```
 usage: generate_pbs.py [-h] [-w WALLTIME] [-n NODES] [-p PPN] [-q PMEM]
                        [-m MEM] [-e EMAIL] [-x EXECUTABLE] [-d DIRECTORY]
                        [-o OUTPUT]
@@ -32,6 +33,7 @@ optional arguments:
   -o OUTPUT, --output OUTPUT
                         Name of the PBS job file to write to. Defaults to
                         PBS.txt
+```
 
 ## Installation
 
@@ -44,11 +46,11 @@ export PATH=$PATH:/the/place/where/you/put/the/script/
 
 ## Example Usage
 
-This script is intended to be run in the Materials Studio job directory to produce a PBS script to run the job on Mesabi. A typical usage, using default values, would be:
+This script is intended to be run in the Materials Studio job directory to produce a PBS script to run the job on Mesabi. A typical usage on Mesabi, using default values, would be:
 
 ```
 cd my_job_directory
 generate_pbs.py my_ms_jobfile
 ```
 
-where `my_job_directory` is the directory containing your Materials Studio job, and `my_ms_jobfile` is the name of the Materials Studio job file that you would run as input to e.g. CASTEP.
+where `my_job_directory` is the directory containing your Materials Studio job, and `my_ms_jobfile` is the name of the Materials Studio job file that you would run as input to e.g. CASTEP. This would generate a PBS script called `PBS.txt` that you would then submit with qsub.
